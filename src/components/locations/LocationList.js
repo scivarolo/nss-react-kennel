@@ -5,14 +5,14 @@ class LocationList extends Component {
     return (
       <article>
         <h1>Location List</h1>
-        <section>
-          <h4>Nashville North</h4>
-          <h5>500 North Puppy Way</h5>
-        </section>
-        <section>
-          <h4>Nashville South</h4>
-          <h5>500 South Puppy Way</h5>
-        </section>
+        {
+          this.props.locations.map(location => {
+            return <div key={location.id}>
+              <h4>{location.name}</h4>
+              <p>{location.address}</p>
+            </div>
+          })
+        }
       </article>
     )
   }

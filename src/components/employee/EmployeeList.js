@@ -3,13 +3,16 @@ import React, { Component } from 'react'
 class EmployeeList extends Component {
   render() {
     return (
-      <article>
+      <section className="employees">
         <h1>Employee List</h1>
-        <section>Jessica Younker</section>
-        <section>Jordan Nelson</section>
-        <section>Zoe LeBlanc</section>
-        <section>Blaise Roberts</section>
-      </article>
+        {
+          this.props.employees.map(employee =>
+            <div key={employee.id}>
+              {employee.name}
+            </div>
+          )
+        }
+      </section>
     )
   }
 }
