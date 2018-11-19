@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class LocationList extends Component {
   render() {
     return (
-      <article>
+      <section className="container mt-5">
         <h1>Location List</h1>
         {
           this.props.locations.map(location => {
@@ -13,7 +13,7 @@ class LocationList extends Component {
             </div>
           })
         }
-      </article>
+      </section>
     )
   }
 }

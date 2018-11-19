@@ -16,7 +16,7 @@ class AnimalList extends Component {
 
   render() {
     return (
-      <article>
+      <section className="container mt-5">
         <h1>Animal List</h1>
         {
           this.props.animals.map(animal => {
@@ -27,7 +27,7 @@ class AnimalList extends Component {
           })
         }
 
-      </article>
+      </section>
     )
   }
 }
