@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 class NavBar extends Component {
@@ -10,16 +10,16 @@ class NavBar extends Component {
         <span className="navbar-brand">Kennel</span>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/">Locations</Link>
+            <NavLink exact className="nav-link" activeClassName="active" to="/">Locations</NavLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/animals">Animals</Link>
+            <NavLink className="nav-link" activeClassName="active" to="/animals">Animals</NavLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/employees">Employees</Link>
+            <NavLink className="nav-link" activeClassName="active" to="/employees">Employees</NavLink>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/owners">Owners</Link>
+            <NavLink className="nav-link" activeClassName="active" to="/owners">Owners</NavLink>
           </li>
         </ul>
       </nav>
