@@ -6,8 +6,9 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light fixed-top light-blue flex-md-nowrap p-0 shadow">
-        <ul className="nav nav-pills">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+        <span className="navbar-brand">Kennel</span>
+        <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/">Locations</Link>
           </li>

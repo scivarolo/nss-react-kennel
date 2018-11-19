@@ -28,13 +28,13 @@ class ApplicationViews extends Component {
   ]
 
   ownersFromAPI = [
-    { id: 1, name: "Kevin Corn" },
-    { id: 2, name: "Sebastian Civarolo" },
-    { id: 3, name: "Samantha Merritt" },
-    { id: 4, name: "Clint Hime" },
-    { id: 5, name: "Mary Hime" },
-    { id: 6, name: "Alyssa Nelson" },
-    { id: 7, name: "Steven Alves" }
+    { id: 1, name: "Kevin Corn", phone: "123-456-7890" },
+    { id: 2, name: "Sebastian Civarolo", phone: "234-567-8901"},
+    { id: 3, name: "Samantha Merritt", phone: "345-678-9012" },
+    { id: 4, name: "Clint Hime", phone: "456-789-0123" },
+    { id: 5, name: "Mary Hime", phone: "567-890-1234" },
+    { id: 6, name: "Alyssa Nelson", phone: "678-901-2345" },
+    { id: 7, name: "Steven Alves", phone: "789-012-3456" }
   ]
 
   animalOwnersFromAPI = [
