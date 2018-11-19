@@ -1,5 +1,11 @@
 import { Route } from 'react-router-dom'
 import React, { Component } from "react"
+
+import AnimalManager from '../modules/AnimalManager'
+import EmployeeManager from '../modules/EmployeeManager'
+import LocationManager from '../modules/LocationManager'
+import OwnerManager from '../modules/OwnerManager'
+
 import AnimalList from './animals/AnimalList'
 import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
@@ -80,22 +86,19 @@ class ApplicationViews extends Component {
     const newState = {}
     const baseUrl = "http://localhost:5002/"
 
-    fetch(`${baseUrl}locations`)
-      .then(r => r.json())
+
+    AnimalManager.getAll()
+      .then(animals => newState.animals = animals)
+    .then(() => LocationManager.getAll())
       .then(locations => newState.locations = locations)
-      .then(() => fetch(`${baseUrl}animals`))
-        .then(r => r.json())
-        .then(animals => newState.animals = animals)
-      .then(() => fetch(`${baseUrl}employees`))
-        .then(r => r.json())
-        .then(employees => newState.employees = employees)
-      .then(() => fetch(`${baseUrl}owners`))
-        .then(r => r.json())
-        .then(owners => newState.owners = owners)
-      .then(() => fetch(`${baseUrl}animalOwners`))
-        .then(r => r.json())
-        .then(animalOwners => newState.animalOwners = animalOwners)
-      .then(() => this.setState(newState))
+    .then(() => EmployeeManager.getAll())
+      .then(employees => newState.employees = employees)
+    .then(() => OwnerManager.getAll())
+      .then(owners => newState.owners = owners)
+    .then(() => fetch(`${baseUrl}animalOwners`))
+      .then(r => r.json())
+      .then(animalOwners => newState.animalOwners = animalOwners)
+    .then(() => this.setState(newState))
   }
 
   render() {
