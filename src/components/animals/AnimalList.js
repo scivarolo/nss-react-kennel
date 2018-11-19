@@ -16,16 +16,27 @@ class AnimalList extends Component {
 
   render() {
     return (
-      <section className="container mt-5">
+      <section className="animals container mt-5">
         <h1>Animal List</h1>
+        <div className="card-columns">
         {
           this.props.animals.map(animal => {
-            return <div key={animal.id}>
-              <h4>{animal.name}</h4>
-              <p>Owners: {this.ownedBy(animal.id)}</p>
-            </div>
+            return (
+
+              <div key={animal.id} className="card">
+                <div className="card-header">{animal.type}</div>
+                <div className="card-body">
+                  <h4 className="card-title">{animal.name}</h4>
+                  <p className="card-subtitle">Owners: {this.ownedBy(animal.id)}</p>
+                  <button type="button" className="btn btn-sm btn-danger"
+                    onClick = {() => this.props.deleteAnimal(animal.id)}>Delete</button>
+                </div>
+              </div>
+
+            )
           })
         }
+        </div>
 
       </section>
     )

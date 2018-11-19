@@ -6,13 +6,25 @@ import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
 
 class ApplicationViews extends Component {
-  // TODO: Pull from API
   state = {
     employees: [],
     locations: [],
     animals: [],
     owners: [],
     animalOwners: []
+  }
+
+  deleteAnimal = id => {
+    return fetch(`http://localhost:5002/animals/${id}`, {
+      method: "DELETE"
+    })
+    .then(e => e.json())
+    .then(() => fetch(`http://localhost:5002/animals`))
+    .then(r => r.json())
+    .then(animals => this.setState({
+        animals: animals
+      })
+    )
   }
 
   componentDidMount() {
@@ -44,7 +56,11 @@ class ApplicationViews extends Component {
           return <LocationList locations={this.state.locations} />
         }} />
         <Route path="/animals" render={() => {
-          return <AnimalList animals={this.state.animals} owners={this.state.owners} animalOwners={this.state.animalOwners} />
+          return <AnimalList
+            animals={this.state.animals}
+            owners={this.state.owners}
+            animalOwners={this.state.animalOwners}
+            deleteAnimal={this.deleteAnimal} />
         }} />
         <Route path="/employees" render={() => {
           return <EmployeeList employees={this.state.employees} />
