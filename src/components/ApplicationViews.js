@@ -27,6 +27,18 @@ class ApplicationViews extends Component {
     )
   }
 
+  fireEmployee = id => {
+    return fetch(`http://localhost:5002/employees/${id}`, {
+      method: "DELETE"
+    }).then(e => e.json())
+    .then(() => fetch(`http://localhost:5002/employees`))
+    .then(r => r.json())
+    .then(employees => this.setState({
+        employees: employees
+      })
+    )
+  }
+
   componentDidMount() {
     const newState = {}
     const baseUrl = "http://localhost:5002/"
@@ -63,7 +75,9 @@ class ApplicationViews extends Component {
             deleteAnimal={this.deleteAnimal} />
         }} />
         <Route path="/employees" render={() => {
-          return <EmployeeList employees={this.state.employees} />
+          return <EmployeeList
+            employees={this.state.employees}
+            fireEmployee={this.fireEmployee} />
         }} />
         <Route path="/owners" render={() => {
           return <OwnerList owners={this.state.owners} />
