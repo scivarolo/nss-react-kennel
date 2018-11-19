@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import EmployeeList from './employee/EmployeeList'
 import LocationList from './locations/LocationList'
-import "./kennel.css"
+import "./kennel.scss"
 import AnimalList from './animals/AnimalList';
 
 class Kennel extends Component {
