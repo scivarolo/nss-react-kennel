@@ -10,6 +10,9 @@ import AnimalList from './animals/AnimalList'
 import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
+
+import AnimalDetail from './animals/AnimalDetail'
+
 import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
@@ -63,13 +66,20 @@ class ApplicationViews extends Component {
         <Route exact path="/" render={() => {
           return <LocationList locations={this.state.locations} />
         }} />
-        <Route path="/animals" render={() => {
+        <Route exact path="/animals" render={() => {
           return <AnimalList
             animals={this.state.animals}
             owners={this.state.owners}
             animalOwners={this.state.animalOwners}
             deleteAnimal={this.deleteAnimal} />
         }} />
+
+        <Route
+          path="/animals/:animalId(\d+)"
+          render={props => {
+            return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+          }} />
+
         <Route exact path="/employees" render={() => {
           return <EmployeeList
             employees={this.state.employees}
