@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import { NavLink } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 class NavBar extends Component {
   state = {
-    inputValue: ""
+    inputValue: "",
   }
 
   updateValue(e) {
     this.setState({inputValue: e.target.value})
   }
 
+  submitSearch(e) {
+    e.preventDefault()
+    this.props.history.push('/results')
+    return this.props.doSearch(this.state.inputValue)
+  }
+
   render() {
+
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-primary sticky-top shadow">
         <span className="navbar-brand">Kennel</span>
@@ -30,8 +37,7 @@ class NavBar extends Component {
           </li>
         </ul>
         <form className="form-inline ml-3" onSubmit={(e) => {
-              e.preventDefault()
-              return this.props.doSearch(this.state.inputValue)
+              this.submitSearch(e)
             }
           }>
           <input type="text" value={this.state.inputValue}
@@ -43,4 +49,4 @@ class NavBar extends Component {
 
 }
 
-export default NavBar
+export default withRouter(NavBar)

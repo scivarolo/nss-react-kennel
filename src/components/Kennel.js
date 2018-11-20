@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from "./nav/NavBar"
 import ApplicationViews from "./ApplicationViews"
-import { withRouter } from 'react-router-dom'
 
 import "./kennel.scss"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -12,7 +11,6 @@ class Kennel extends Component {
     results: []
   }
   doSearch = (queryString) => {
-    this.props.history.push('/results')
     return Search.getResults(queryString).then(r => this.setState({results: r}))
   }
 
@@ -28,4 +26,4 @@ class Kennel extends Component {
   }
 }
 
-export default withRouter(Kennel)
+export default Kennel
