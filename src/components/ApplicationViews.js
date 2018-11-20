@@ -20,19 +20,6 @@ class ApplicationViews extends Component {
     animalOwners: []
   }
 
-  // deleteAnimal = id => {
-  //   return fetch(`http://localhost:5002/animals/${id}`, {
-  //     method: "DELETE"
-  //   })
-  //   .then(e => e.json())
-  //   .then(() => fetch(`http://localhost:5002/animals`))
-  //   .then(r => r.json())
-  //   .then(animals => this.setState({
-  //       animals: animals
-  //     })
-  //   )
-  // }
-
   deleteAnimal = id => {
     return AnimalManager.deleteAndList(id)
       .then(animals => this.setState({
@@ -42,52 +29,15 @@ class ApplicationViews extends Component {
   }
 
   deleteOwner = id => {
-    let info = []
-    let newState = []
-    //find owner in animalsOwners and store in animalInfo
-    return fetch(`http://localhost:5002/animalOwners/${id}`)
-    .then(r => r.json())
-    .then(r => info.push(r))
-    //delete owner item
-    .then(() => fetch(`http://localhost:5002/owners/${info[0].ownerId}`, {
-      method: "DELETE"
-    }))
-    //check if animalId is still present in animalOwners (aka there's a second owner)
-    .then(() => fetch(`http://localhost:5002/animalOwners?animalId=${info[0].animalId}`))
-    .then(r => r.json())
-    //delete animal if there is no other owner
-    .then(r => {
-      if(r.length === 0) {
-        return fetch(`http://localhost:5002/animals/${info[0].animalId}`,{
-          method: "DELETE"
-        })
-      }
-    })
-
-    //update state for all 3 tables
-    .then(() => fetch(`http://localhost:5002/owners`)
-      .then(r => r.json())
-      .then(owners => newState.owners = owners)
-    .then(() => fetch(`http://localhost:5002/animals`))
-      .then(r => r.json())
-      .then(animals => newState.animals = animals)
-    .then(() => fetch(`http://localhost:5002/animalOwners`))
-      .then(r => r.json())
-      .then(animalOwners => newState.animalOwners = animalOwners))
-    .then(() => this.setState(newState))
-
+    return OwnerManager.deleteAndList(id)
+    .then(newState => this.setState(newState))
   }
 
   fireEmployee = id => {
-    return fetch(`http://localhost:5002/employees/${id}`, {
-      method: "DELETE"
-    }).then(e => e.json())
-    .then(() => fetch(`http://localhost:5002/employees`))
-    .then(r => r.json())
+    return EmployeeManager.deleteAndList(id)
     .then(employees => this.setState({
-        employees: employees
-      })
-    )
+      employees: employees
+    }))
   }
 
   componentDidMount() {

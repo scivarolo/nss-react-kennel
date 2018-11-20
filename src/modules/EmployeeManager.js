@@ -6,6 +6,11 @@ const EmployeeManager = {
   },
   getAll() {
     return fetch(remoteURL).then(employees => employees.json())
+  },
+  deleteAndList(id) {
+    return fetch(`${remoteURL}/${id}`, { method: "DELETE" })
+    .then(() => fetch(remoteURL))
+    .then(r => r.json())
   }
 }
 
