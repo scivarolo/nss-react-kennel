@@ -20,14 +20,22 @@ class ApplicationViews extends Component {
     animalOwners: []
   }
 
+  // deleteAnimal = id => {
+  //   return fetch(`http://localhost:5002/animals/${id}`, {
+  //     method: "DELETE"
+  //   })
+  //   .then(e => e.json())
+  //   .then(() => fetch(`http://localhost:5002/animals`))
+  //   .then(r => r.json())
+  //   .then(animals => this.setState({
+  //       animals: animals
+  //     })
+  //   )
+  // }
+
   deleteAnimal = id => {
-    return fetch(`http://localhost:5002/animals/${id}`, {
-      method: "DELETE"
-    })
-    .then(e => e.json())
-    .then(() => fetch(`http://localhost:5002/animals`))
-    .then(r => r.json())
-    .then(animals => this.setState({
+    return AnimalManager.deleteAndList(id)
+      .then(animals => this.setState({
         animals: animals
       })
     )
