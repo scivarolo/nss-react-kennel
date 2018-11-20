@@ -10,6 +10,7 @@ import AnimalList from './animals/AnimalList'
 import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
+import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
   state = {
@@ -69,15 +70,19 @@ class ApplicationViews extends Component {
             animalOwners={this.state.animalOwners}
             deleteAnimal={this.deleteAnimal} />
         }} />
-        <Route path="/employees" render={() => {
+        <Route exact path="/employees" render={() => {
           return <EmployeeList
             employees={this.state.employees}
             fireEmployee={this.fireEmployee} />
         }} />
-        <Route path="/owners" render={() => {
+        <Route exact path="/owners" render={() => {
           return <OwnerList
             owners={this.state.owners}
             deleteOwner={this.deleteOwner} />
+        }} />
+        <Route exact path="/results" render={() => {
+          return <SearchResults
+            results={this.props.searchResults} />
         }} />
       </React.Fragment>
     )

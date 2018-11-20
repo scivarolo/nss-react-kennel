@@ -19,6 +19,10 @@ class APIManager {
     return fetch(`${this.urls[this.resource]}`).then(r => r.json())
   }
 
+  query(queryString) {
+    return fetch(`${this.urls[this.resource]}?q=${queryString}`)
+    .then(r => r.json())
+  }
   deleteAndList(id) {
     return fetch(`${this.urls[this.resource]}/${id}`, {
       method: "DELETE"
