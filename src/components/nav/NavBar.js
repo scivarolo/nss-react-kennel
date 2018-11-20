@@ -31,11 +31,11 @@ class NavBar extends Component {
         </ul>
         <form className="form-inline ml-3" onSubmit={(e) => {
               e.preventDefault()
-              console.log(this.state.inputValue)
-              this.props.doSearch(this.state.inputValue)
+              return this.props.doSearch(this.state.inputValue)
             }
           }>
-          <input type="text" value={this.state.inputValue} onChange={e => this.updateValue(e)}className="form-control" placeholder="Search" />
+          <input type="text" value={this.state.inputValue}
+          onChange={e => this.updateValue(e)}className="form-control" placeholder="Search" />
         </form>
       </nav>
     )

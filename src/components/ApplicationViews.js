@@ -10,6 +10,7 @@ import AnimalList from './animals/AnimalList'
 import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
+import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
   state = {
@@ -78,6 +79,10 @@ class ApplicationViews extends Component {
           return <OwnerList
             owners={this.state.owners}
             deleteOwner={this.deleteOwner} />
+        }} />
+        <Route path="/results" render={() => {
+          return <SearchResults
+            results={this.props.searchResults} />
         }} />
       </React.Fragment>
     )

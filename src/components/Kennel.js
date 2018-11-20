@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import NavBar from "./nav/NavBar"
 import ApplicationViews from "./ApplicationViews"
+import { withRouter } from 'react-router-dom'
 
 import "./kennel.scss"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Search from '../modules/Search';
 
 class Kennel extends Component {
-
-  doSearch(queryString) {
-    let results = Search.getResults(queryString).then(r => r)
-
-    console.log("Search Results", results)
+  state = {
+    results: []
+  }
+  doSearch = (queryString) => {
+    this.props.history.push('/results')
+    return Search.getResults(queryString).then(r => this.setState({results: r}))
   }
 
   render() {
@@ -19,11 +21,11 @@ class Kennel extends Component {
 
       <React.Fragment>
         <NavBar doSearch={this.doSearch} />
-        <ApplicationViews />
+        <ApplicationViews searchResults={this.state.results} />
       </React.Fragment>
 
     );
   }
 }
 
-export default Kennel
+export default withRouter(Kennel)
