@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import AnimalManager from "../../modules/AnimalManager"
+
 class AnimalDetail extends Component {
 
   render() {
     const animal = this.props.animals.find(animal => animal.id === parseInt(this.props.match.params.animalId))
 
     return (
-      <section className="animal">
+      <section className="animal container">
         <div key={animal.id} className="card">
           <div className="card-body">
             <h4 className="card-title">
