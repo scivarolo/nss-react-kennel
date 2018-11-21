@@ -13,6 +13,7 @@ import OwnerList from './owners/OwnerList'
 
 import AnimalDetail from './animals/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
+import OwnerDetail from './owners/OwnerDetail'
 import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
@@ -97,6 +98,13 @@ class ApplicationViews extends Component {
             owners={this.state.owners}
             deleteOwner={this.deleteOwner} />
         }} />
+
+        <Route path="/owners/:ownerId(\d+)" render={props => {
+          return <OwnerDetail { ...props }
+          owners={this.state.owners}
+          deleteOwner={this.deleteOwner} />
+        }} />
+
         <Route exact path="/results" render={() => {
           return <SearchResults
             results={this.props.searchResults} />
