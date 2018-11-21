@@ -27,8 +27,8 @@ class AnimalList extends Component {
                 <div className="card-header">{animal.type}</div>
                 <div className="card-body">
                   <h4 className="card-title">{animal.name}</h4>
-                  <Link to={`/animals/${animal.id}`}>Details</Link>
-                  <p className="card-subtitle">Owners: {this.ownedBy(animal.id)}</p>
+                  <p className="card-subtitle mb-3">Owners: {this.ownedBy(animal.id)}</p>
+                  <Link className="btn btn-sm btn-info mr-1" to={`/animals/${animal.id}`}>Details</Link>
                   <button type="button" className="btn btn-sm btn-danger"
                     onClick = {() => this.props.deleteAnimal(animal.id)}>Delete</button>
                 </div>

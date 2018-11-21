@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import AnimalManager from "../../modules/AnimalManager"
-
 class AnimalDetail extends Component {
 
   render() {

@@ -12,7 +12,7 @@ import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
 
 import AnimalDetail from './animals/AnimalDetail'
-
+import EmployeeDetail from './employee/EmployeeDetail'
 import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
@@ -45,7 +45,6 @@ class ApplicationViews extends Component {
     const newState = {}
     const baseUrl = "http://localhost:5002/"
 
-
     AnimalManager.getAll()
       .then(animals => newState.animals = animals)
     .then(() => LocationManager.getAll())
@@ -63,6 +62,7 @@ class ApplicationViews extends Component {
   render() {
     return (
       <React.Fragment>
+
         <Route exact path="/" render={() => {
           return <LocationList locations={this.state.locations} />
         }} />
@@ -85,6 +85,13 @@ class ApplicationViews extends Component {
             employees={this.state.employees}
             fireEmployee={this.fireEmployee} />
         }} />
+
+        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+          return <EmployeeDetail { ...props }
+            employees={this.state.employees}
+            fireEmployee={this.fireEmployee} />
+        }} />
+
         <Route exact path="/owners" render={() => {
           return <OwnerList
             owners={this.state.owners}
