@@ -11,6 +11,7 @@ import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
 
+import LocationDetail from './locations/LocationDetail'
 import AnimalDetail from './animals/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
@@ -67,6 +68,13 @@ class ApplicationViews extends Component {
         <Route exact path="/" render={() => {
           return <LocationList locations={this.state.locations} />
         }} />
+
+        <Route
+          path="/locations/:locationId(\d+)"
+          render={(props) => {
+            return <LocationDetail {...props} locations={this.state.locations} />
+          }} />
+
         <Route exact path="/animals" render={() => {
           return <AnimalList
             animals={this.state.animals}
