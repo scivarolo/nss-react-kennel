@@ -1,5 +1,6 @@
 {
-  "employees": [{
+  "employees": [
+    {
       "id": 1,
       "name": "Jessica Younker"
     },
@@ -16,7 +17,8 @@
       "name": "Blaise Roberts"
     }
   ],
-  "locations": [{
+  "locations": [
+    {
       "id": 1,
       "name": "Nashville North",
       "address": "500 Circle Way"
@@ -27,7 +29,8 @@
       "address": "10101 Binary Court"
     }
   ],
-  "animals": [{
+  "animals": [
+    {
       "id": 1,
       "name": "Mochi",
       "type": "Dog"
@@ -51,9 +54,16 @@
       "id": 5,
       "name": "Gwendolyn",
       "type": "Dog"
+    },
+    {
+      "name": "Test",
+      "type": "Dog",
+      "employeeId": 1,
+      "id": 6
     }
   ],
-  "owners": [{
+  "owners": [
+    {
       "id": 1,
       "name": "Kevin Corn",
       "phone": "123-456-7890"
@@ -89,7 +99,8 @@
       "phone": "789-012-3456"
     }
   ],
-  "animalOwners": [{
+  "animalOwners": [
+    {
       "id": 1,
       "animalId": 1,
       "ownerId": 1

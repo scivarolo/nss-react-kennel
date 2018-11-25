@@ -15,6 +15,9 @@ import LocationDetail from './locations/LocationDetail'
 import AnimalDetail from './animals/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
+
+import AnimalForm from './animals/AnimalForm'
+
 import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
@@ -29,6 +32,15 @@ class ApplicationViews extends Component {
   deleteAnimal = id => {
     return AnimalManager.deleteAndList(id)
       .then(newState => this.setState(newState))
+  }
+
+  addAnimal = animal => {
+    return AnimalManager.post(animal)
+    .then(() => AnimalManager.getAll())
+    .then(animals => this.setState({
+        animals:animals
+      })
+    )
   }
 
   deleteOwner = id => {
@@ -80,6 +92,12 @@ class ApplicationViews extends Component {
             owners={this.state.owners}
             animalOwners={this.state.animalOwners}
             deleteAnimal={this.deleteAnimal} />
+        }} />
+
+        <Route path="/animals/new" render={props => {
+          return <AnimalForm {...props}
+                              addAnimal={this.addAnimal}
+                              employees={this.state.employees} />
         }} />
 
         <Route
