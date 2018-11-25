@@ -20,7 +20,7 @@ class NavBar extends Component {
   render() {
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary sticky-top shadow">
+      <nav className="navbar navbar-expand-md navbar-dark bg-primary sticky-top shadow mb-5">
         <span className="navbar-brand">Kennel</span>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">

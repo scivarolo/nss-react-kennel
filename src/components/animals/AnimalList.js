@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 class AnimalList extends Component {
 
   ownedBy(animalId) {
@@ -17,7 +17,7 @@ class AnimalList extends Component {
   render() {
     return (
       <section className="animals container mt-5">
-        <h1>Animal List</h1>
+        <h1 className="mb-4">Animal List</h1>
         <div className="card-columns">
         {
           this.props.animals.map(animal => {
@@ -27,7 +27,8 @@ class AnimalList extends Component {
                 <div className="card-header">{animal.type}</div>
                 <div className="card-body">
                   <h4 className="card-title">{animal.name}</h4>
-                  <p className="card-subtitle">Owners: {this.ownedBy(animal.id)}</p>
+                  <p className="card-subtitle mb-3">Owners: {this.ownedBy(animal.id)}</p>
+                  <Link className="btn btn-sm btn-info mr-1" to={`/animals/${animal.id}`}>Details</Link>
                   <button type="button" className="btn btn-sm btn-danger"
                     onClick = {() => this.props.deleteAnimal(animal.id)}>Delete</button>
                 </div>

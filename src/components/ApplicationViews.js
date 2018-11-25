@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import React, { Component } from "react"
 
 import AnimalManager from '../modules/AnimalManager'
@@ -10,6 +10,11 @@ import AnimalList from './animals/AnimalList'
 import LocationList from './locations/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owners/OwnerList'
+
+import LocationDetail from './locations/LocationDetail'
+import AnimalDetail from './animals/AnimalDetail'
+import EmployeeDetail from './employee/EmployeeDetail'
+import OwnerDetail from './owners/OwnerDetail'
 import SearchResults from './search/SearchResults'
 
 class ApplicationViews extends Component {
@@ -42,7 +47,6 @@ class ApplicationViews extends Component {
     const newState = {}
     const baseUrl = "http://localhost:5002/"
 
-
     AnimalManager.getAll()
       .then(animals => newState.animals = animals)
     .then(() => LocationManager.getAll())
@@ -59,32 +63,60 @@ class ApplicationViews extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Switch>
         <Route exact path="/" render={() => {
           return <LocationList locations={this.state.locations} />
         }} />
-        <Route path="/animals" render={() => {
+
+        <Route
+          path="/locations/:locationId(\d+)"
+          render={(props) => {
+            return <LocationDetail {...props} locations={this.state.locations} />
+          }} />
+
+        <Route exact path="/animals" render={() => {
           return <AnimalList
             animals={this.state.animals}
             owners={this.state.owners}
             animalOwners={this.state.animalOwners}
             deleteAnimal={this.deleteAnimal} />
         }} />
+
+        <Route
+          path="/animals/:animalId(\d+)"
+          render={props => {
+            return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+          }} />
+
         <Route exact path="/employees" render={() => {
           return <EmployeeList
             employees={this.state.employees}
             fireEmployee={this.fireEmployee} />
         }} />
+
+        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+          return <EmployeeDetail { ...props }
+            employees={this.state.employees}
+            fireEmployee={this.fireEmployee} />
+        }} />
+
         <Route exact path="/owners" render={() => {
           return <OwnerList
             owners={this.state.owners}
             deleteOwner={this.deleteOwner} />
         }} />
+
+        <Route path="/owners/:ownerId(\d+)" render={props => {
+          return <OwnerDetail { ...props }
+          owners={this.state.owners}
+          deleteOwner={this.deleteOwner} />
+        }} />
+
         <Route exact path="/results" render={() => {
           return <SearchResults
             results={this.props.searchResults} />
         }} />
-      </React.Fragment>
+      </Switch>
     )
   }
 
