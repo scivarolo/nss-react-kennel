@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import React, { Component } from "react"
 
 import AnimalManager from '../modules/AnimalManager'
@@ -63,8 +63,7 @@ class ApplicationViews extends Component {
 
   render() {
     return (
-      <React.Fragment>
-
+      <Switch>
         <Route exact path="/" render={() => {
           return <LocationList locations={this.state.locations} />
         }} />
@@ -117,7 +116,7 @@ class ApplicationViews extends Component {
           return <SearchResults
             results={this.props.searchResults} />
         }} />
-      </React.Fragment>
+      </Switch>
     )
   }
 
