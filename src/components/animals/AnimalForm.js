@@ -33,23 +33,28 @@ class AnimalForm extends Component {
   render() {
     return (
       <div className="container">
+        <div className="header">
+          <h2>Admit an Animal</h2>
+        </div>
         <form className="animalForm">
           <div className="form-group">
             <label htmlFor="animalname">Animal Name</label>
             <input type="text" required="true" className="form-control" onChange={this.handleFieldChange} id="animalName" placeholder="Animal Name" />
           </div>
-          <div className="form-group">
-            <label htmlFor="type">Breed</label>
-            <input type="text" required="true" className="form-control" onChange={this.handleFieldChange} id="type" placeholder="Type" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="employee">Assign to Caretaker</label>
-            <select className="form-control" defaultValue="" name="employee" id="employee" onChange={this.handleFieldChange}>
-              <option value="">Select an employee</option>
-              {
-                this.props.employees.map(e => <option key={e.id} id={e.id}>{e.name}</option>)
-              }
-            </select>
+          <div class="row">
+            <div className="form-group col-md-6">
+              <label htmlFor="type">Animal Type</label>
+              <input type="text" required="true" className="form-control" onChange={this.handleFieldChange} id="type" placeholder="Type" />
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="employee">Assign to Caretaker</label>
+              <select className="form-control" defaultValue="" name="employee" id="employee" onChange={this.handleFieldChange}>
+                <option value="">Select an employee</option>
+                {
+                  this.props.employees.map(e => <option key={e.id} id={e.id}>{e.name}</option>)
+                }
+              </select>
+            </div>
           </div>
           <button type="submi" className="btn btn-primary" onClick={this.constructNewAnimal}>Admit Animal</button>
         </form>
