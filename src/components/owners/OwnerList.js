@@ -4,7 +4,14 @@ class OwnerList extends Component {
   render() {
     return (
       <section className="owners container mt-5">
-        <h1 className="mb-4">Owners List</h1>
+        <div className="row">
+          <div className="col-md-10">
+            <h1 className="mb-4">Owners List</h1>
+          </div>
+          <div className="col-md-2">
+            <Link className="btn btn-primary float-right" to="/owners/new">Add New Owner</Link>
+          </div>
+        </div>
         <div className="card-columns">
         {
           this.props.owners.map(owner => {

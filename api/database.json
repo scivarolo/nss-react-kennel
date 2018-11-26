@@ -1,5 +1,6 @@
 {
-  "employees": [{
+  "employees": [
+    {
       "id": 1,
       "name": "Jessica Younker"
     },
@@ -16,7 +17,8 @@
       "name": "Blaise Roberts"
     }
   ],
-  "locations": [{
+  "locations": [
+    {
       "id": 1,
       "name": "Nashville North",
       "address": "500 Circle Way"
@@ -27,33 +29,40 @@
       "address": "10101 Binary Court"
     }
   ],
-  "animals": [{
-      "id": 1,
+  "animals": [
+    {
       "name": "Mochi",
-      "type": "Dog"
+      "type": "Dog",
+      "employeeId": 1,
+      "id": 7
     },
     {
-      "id": 2,
       "name": "Milhouse",
-      "type": "Dog"
+      "type": "Dog",
+      "employeeId": 3,
+      "id": 8
     },
     {
-      "id": 3,
       "name": "Sawyer",
-      "type": "Dog"
+      "type": "Dog",
+      "employeeId": 4,
+      "id": 9
     },
     {
-      "id": 4,
       "name": "Jack",
-      "type": "Cat"
+      "type": "Cat",
+      "employeeId": 1,
+      "id": 10
     },
     {
-      "id": 5,
       "name": "Gwendolyn",
-      "type": "Dog"
+      "type": "Dog",
+      "employeeId": 2,
+      "id": 11
     }
   ],
-  "owners": [{
+  "owners": [
+    {
       "id": 1,
       "name": "Kevin Corn",
       "phone": "123-456-7890"
@@ -87,42 +96,48 @@
       "id": 7,
       "name": "Steven Alves",
       "phone": "789-012-3456"
+    },
+    {
+      "name": "Test Owner ",
+      "phone": "123-456-7890",
+      "id": 8
     }
   ],
-  "animalOwners": [{
-      "id": 1,
-      "animalId": 1,
-      "ownerId": 1
+  "animalOwners": [
+    {
+      "animalId": 7,
+      "ownerId": 1,
+      "id": 10
     },
     {
-      "id": 2,
-      "animalId": 1,
-      "ownerId": 2
+      "animalId": 7,
+      "ownerId": 2,
+      "id": 11
     },
     {
-      "id": 3,
-      "animalId": 2,
-      "ownerId": 3
+      "animalId": 8,
+      "ownerId": 3,
+      "id": 12
     },
     {
-      "id": 4,
-      "animalId": 3,
-      "ownerId": 4
+      "animalId": 9,
+      "ownerId": 4,
+      "id": 13
     },
     {
-      "id": 5,
-      "animalId": 3,
-      "ownerId": 5
+      "animalId": 9,
+      "ownerId": 5,
+      "id": 14
     },
     {
-      "id": 6,
-      "animalId": 4,
-      "ownerId": 6
+      "animalId": 10,
+      "ownerId": 6,
+      "id": 15
     },
     {
-      "id": 7,
-      "animalId": 5,
-      "ownerId": 7
+      "animalId": 11,
+      "ownerId": 7,
+      "id": 16
     }
   ]
 }

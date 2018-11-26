@@ -15,7 +15,12 @@ import LocationDetail from './locations/LocationDetail'
 import AnimalDetail from './animals/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
+
+import AnimalForm from './animals/AnimalForm'
+import EmployeeForm from './employee/EmployeeForm'
+
 import SearchResults from './search/SearchResults'
+import OwnerForm from './owners/OwnerForm';
 
 class ApplicationViews extends Component {
   state = {
@@ -31,9 +36,53 @@ class ApplicationViews extends Component {
       .then(newState => this.setState(newState))
   }
 
+  addAnimal = (animal, owners) => {
+
+    let newState = {}
+    const baseUrl = "http://localhost:5002/"
+
+    return AnimalManager.post(animal)
+      .then(newAnimal => {
+        // for each owner, add an entry to animalOwners with ownerId and newAnimal.id
+        let ownerPromises = []
+        owners.forEach(owner => {
+          let object = {
+            animalId: newAnimal.id,
+            ownerId: owner
+          }
+          return AnimalManager.linkOwnerAndAnimal(object)
+        })
+        return Promise.all(ownerPromises)
+      })
+      .then(() => AnimalManager.getAll())
+      .then(animals => newState.animals = animals)
+      .then(() => fetch(`${baseUrl}animalOwners`))
+      .then(r => r.json())
+      .then(animalOwners => newState.animalOwners = animalOwners)
+      .then(() => this.setState(newState))
+  }
+
+  addOwner = owner => {
+    return OwnerManager.post(owner)
+      .then(() => OwnerManager.getAll())
+      .then(owners => this.setState({
+        owners: owners
+      })
+    )
+  }
+
   deleteOwner = id => {
     return OwnerManager.deleteAndList(id)
     .then(newState => this.setState(newState))
+  }
+
+  addEmployee = employee => {
+    return EmployeeManager.post(employee)
+      .then(() => EmployeeManager.getAll())
+      .then(employees => this.setState({
+        employees: employees
+      })
+    )
   }
 
   fireEmployee = id => {
@@ -70,7 +119,7 @@ class ApplicationViews extends Component {
 
         <Route
           path="/locations/:locationId(\d+)"
-          render={(props) => {
+          render={props => {
             return <LocationDetail {...props} locations={this.state.locations} />
           }} />
 
@@ -82,10 +131,21 @@ class ApplicationViews extends Component {
             deleteAnimal={this.deleteAnimal} />
         }} />
 
+        <Route path="/animals/new" render={props => {
+          return <AnimalForm {...props}
+            addAnimal={this.addAnimal}
+            owners={this.state.owners}
+            employees={this.state.employees} />
+        }} />
+
         <Route
           path="/animals/:animalId(\d+)"
           render={props => {
-            return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+            return <AnimalDetail {...props}
+              deleteAnimal={this.deleteAnimal}
+              animals={this.state.animals}
+              owners={this.state.owners}
+              employees={this.state.employees} animalOwners={this.state.animalOwners} />
           }} />
 
         <Route exact path="/employees" render={() => {
@@ -94,9 +154,15 @@ class ApplicationViews extends Component {
             fireEmployee={this.fireEmployee} />
         }} />
 
-        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+        <Route path="/employees/new" render={props => {
+          return <EmployeeForm {...props}
+            addEmployee={this.addEmployee} />
+        }} />
+
+        <Route path="/employees/:employeeId(\d+)" render={props => {
           return <EmployeeDetail { ...props }
             employees={this.state.employees}
+            animals={this.state.animals}
             fireEmployee={this.fireEmployee} />
         }} />
 
@@ -106,9 +172,16 @@ class ApplicationViews extends Component {
             deleteOwner={this.deleteOwner} />
         }} />
 
+        <Route path="/owners/new" render={ props => {
+          return <OwnerForm {...props}
+            addOwner={this.addOwner} />
+        }} />
+
         <Route path="/owners/:ownerId(\d+)" render={props => {
           return <OwnerDetail { ...props }
           owners={this.state.owners}
+          animals={this.state.animals}
+          animalOwners={this.state.animalOwners}
           deleteOwner={this.deleteOwner} />
         }} />
 
