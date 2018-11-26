@@ -31,11 +31,6 @@
   ],
   "animals": [
     {
-      "id": 1,
-      "name": "Mochi",
-      "type": "Dog"
-    },
-    {
       "id": 2,
       "name": "Milhouse",
       "type": "Dog"
@@ -54,6 +49,12 @@
       "id": 5,
       "name": "Gwendolyn",
       "type": "Dog"
+    },
+    {
+      "name": "Mochi",
+      "type": "Dog",
+      "employeeId": 1,
+      "id": 7
     }
   ],
   "owners": [
@@ -100,16 +101,6 @@
   ],
   "animalOwners": [
     {
-      "id": 1,
-      "animalId": 1,
-      "ownerId": 1
-    },
-    {
-      "id": 2,
-      "animalId": 1,
-      "ownerId": 2
-    },
-    {
       "id": 3,
       "animalId": 2,
       "ownerId": 3
@@ -133,6 +124,16 @@
       "id": 7,
       "animalId": 5,
       "ownerId": 7
+    },
+    {
+      "animalId": 7,
+      "ownerId": 1,
+      "id": 10
+    },
+    {
+      "animalId": 7,
+      "ownerId": 2,
+      "id": 11
     }
   ]
 }

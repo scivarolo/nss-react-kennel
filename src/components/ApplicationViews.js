@@ -141,7 +141,11 @@ class ApplicationViews extends Component {
         <Route
           path="/animals/:animalId(\d+)"
           render={props => {
-            return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+            return <AnimalDetail {...props}
+              deleteAnimal={this.deleteAnimal}
+              animals={this.state.animals}
+              owners={this.state.owners}
+              employees={this.state.employees} animalOwners={this.state.animalOwners} />
           }} />
 
         <Route exact path="/employees" render={() => {

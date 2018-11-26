@@ -3,18 +3,40 @@ import { Link } from 'react-router-dom'
 
 class AnimalDetail extends Component {
 
-  render() {
-    const animal = this.props.animals.find(animal => animal.id === parseInt(this.props.match.params.animalId))
+  state = {
+    currentId: "",
+    animal: "",
+    owners: []
+  }
 
+  componentDidMount() {
+    const newState = {}
+
+    newState.currentId = parseInt(this.props.match.params.animalId)
+    newState.animal = this.props.animals.find(animal => animal.id === newState.currentId)
+    newState.owners = this.props.animalOwners.filter(relation => relation.animalId === newState.currentId).map(join => this.props.owners.find(owner => owner.id === join.ownerId))
+    this.setState(newState)
+
+  }
+
+  render() {
     return (
       <section className="animal container">
-        <div key={animal.id} className="card">
+        <div key={this.state.animal.id} className="card">
+          <div className="card-header">
+            {this.state.animal.type}
+          </div>
           <div className="card-body">
             <h4 className="card-title">
-              {animal.name}
+              {this.state.animal.name}
             </h4>
-            <h6>{animal.breed}</h6>
-            <Link className="card-link" to="/animals" onClick={() => this.props.deleteAnimal(animal.id)}>Delete</Link>
+            <h6>Owners:</h6>
+            <ul>
+              {
+                this.state.owners.map(owner => <li key={owner.id}><Link to={`/owners/${owner.id}`}>{owner.name}</Link></li>)
+              }
+            </ul>
+            <Link className="card-link" to="/animals" onClick={() => this.props.deleteAnimal(this.state.animal.id)}>Delete</Link>
           </div>
         </div>
       </section>
