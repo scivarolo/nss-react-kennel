@@ -39,7 +39,7 @@ class AnimalDetail extends Component {
               }
             </ul>
             <h6>Caretaker:</h6>
-            <p>{this.state.employee.name}</p>
+            <p><Link to={`/employees/${this.state.employee.id}`}>{this.state.employee.name}</Link></p>
             <Link className="card-link" to="/animals" onClick={() => this.props.deleteAnimal(this.state.animal.id)}>Delete</Link>
           </div>
         </div>
