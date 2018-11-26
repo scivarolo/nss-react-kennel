@@ -54,12 +54,6 @@
       "id": 5,
       "name": "Gwendolyn",
       "type": "Dog"
-    },
-    {
-      "name": "Test",
-      "type": "Dog",
-      "employeeId": 1,
-      "id": 6
     }
   ],
   "owners": [
