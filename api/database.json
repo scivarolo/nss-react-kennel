@@ -31,30 +31,34 @@
   ],
   "animals": [
     {
-      "id": 2,
-      "name": "Milhouse",
-      "type": "Dog"
-    },
-    {
-      "id": 3,
-      "name": "Sawyer",
-      "type": "Dog"
-    },
-    {
-      "id": 4,
-      "name": "Jack",
-      "type": "Cat"
-    },
-    {
-      "id": 5,
-      "name": "Gwendolyn",
-      "type": "Dog"
-    },
-    {
       "name": "Mochi",
       "type": "Dog",
       "employeeId": 1,
       "id": 7
+    },
+    {
+      "name": "Milhouse",
+      "type": "Dog",
+      "employeeId": 3,
+      "id": 8
+    },
+    {
+      "name": "Sawyer",
+      "type": "Dog",
+      "employeeId": 4,
+      "id": 9
+    },
+    {
+      "name": "Jack",
+      "type": "Cat",
+      "employeeId": 1,
+      "id": 10
+    },
+    {
+      "name": "Gwendolyn",
+      "type": "Dog",
+      "employeeId": 2,
+      "id": 11
     }
   ],
   "owners": [
@@ -101,31 +105,6 @@
   ],
   "animalOwners": [
     {
-      "id": 3,
-      "animalId": 2,
-      "ownerId": 3
-    },
-    {
-      "id": 4,
-      "animalId": 3,
-      "ownerId": 4
-    },
-    {
-      "id": 5,
-      "animalId": 3,
-      "ownerId": 5
-    },
-    {
-      "id": 6,
-      "animalId": 4,
-      "ownerId": 6
-    },
-    {
-      "id": 7,
-      "animalId": 5,
-      "ownerId": 7
-    },
-    {
       "animalId": 7,
       "ownerId": 1,
       "id": 10
@@ -134,6 +113,31 @@
       "animalId": 7,
       "ownerId": 2,
       "id": 11
+    },
+    {
+      "animalId": 8,
+      "ownerId": 3,
+      "id": 12
+    },
+    {
+      "animalId": 9,
+      "ownerId": 4,
+      "id": 13
+    },
+    {
+      "animalId": 9,
+      "ownerId": 5,
+      "id": 14
+    },
+    {
+      "animalId": 10,
+      "ownerId": 6,
+      "id": 15
+    },
+    {
+      "animalId": 11,
+      "ownerId": 7,
+      "id": 16
     }
   ]
 }

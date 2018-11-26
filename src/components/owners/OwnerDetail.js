@@ -17,6 +17,7 @@ class OwnerDetail extends Component {
               {owner.name}
             </h4>
             <h6>{owner.phone}</h6>
+            <h6>Admitted Animals</h6>
             {
               animals.length > 0
                 ? (
