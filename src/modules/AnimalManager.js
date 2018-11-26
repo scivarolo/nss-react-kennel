@@ -21,16 +21,7 @@ class AnimalManager extends APIManager {
         method: "DELETE"
       })
     )
-    //delete owners
-    .then(() => {
-      let promises = []
-      info.forEach(relationship => {
-        promises.push(
-          fetch(`${this.urls.owners}/${relationship.ownerId}`, {method: "DELETE"})
-        )
-      })
-      return Promise.all(promises)
-    })
+
     //get new data to update state and return it
     .then(() => fetch(`${this.urls[this.resource]}`)
       .then(r => r.json())
@@ -43,6 +34,17 @@ class AnimalManager extends APIManager {
       .then(animalOwners => newState.animalOwners = animalOwners))
       .then(() => newState)
 
+  }
+
+  linkOwnerAndAnimal(newObj) {
+    return fetch(this.urls.animalOwners, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newObj)
+    })
+    .then(data => data.json())
   }
 
 }

@@ -36,13 +36,30 @@ class ApplicationViews extends Component {
       .then(newState => this.setState(newState))
   }
 
-  addAnimal = animal => {
+  addAnimal = (animal, owners) => {
+
+    let newState = {}
+    const baseUrl = "http://localhost:5002/"
+
     return AnimalManager.post(animal)
-      .then(() => AnimalManager.getAll())
-      .then(animals => this.setState({
-        animals: animals
+      .then(newAnimal => {
+        // for each owner, add an entry to animalOwners with ownerId and newAnimal.id
+        let ownerPromises = []
+        owners.forEach(owner => {
+          let object = {
+            animalId: newAnimal.id,
+            ownerId: owner
+          }
+          return AnimalManager.linkOwnerAndAnimal(object)
+        })
+        return Promise.all(ownerPromises)
       })
-    )
+      .then(() => AnimalManager.getAll())
+      .then(animals => newState.animals = animals)
+      .then(() => fetch(`${baseUrl}animalOwners`))
+      .then(r => r.json())
+      .then(animalOwners => newState.animalOwners = animalOwners)
+      .then(() => this.setState(newState))
   }
 
   addOwner = owner => {
@@ -117,6 +134,7 @@ class ApplicationViews extends Component {
         <Route path="/animals/new" render={props => {
           return <AnimalForm {...props}
             addAnimal={this.addAnimal}
+            owners={this.state.owners}
             employees={this.state.employees} />
         }} />
 
