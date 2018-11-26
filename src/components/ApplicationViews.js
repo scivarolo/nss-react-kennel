@@ -180,6 +180,8 @@ class ApplicationViews extends Component {
         <Route path="/owners/:ownerId(\d+)" render={props => {
           return <OwnerDetail { ...props }
           owners={this.state.owners}
+          animals={this.state.animals}
+          animalOwners={this.state.animalOwners}
           deleteOwner={this.deleteOwner} />
         }} />
 
