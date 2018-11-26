@@ -6,7 +6,8 @@ class AnimalDetail extends Component {
   state = {
     currentId: "",
     animal: "",
-    owners: []
+    owners: [],
+    employee: ""
   }
 
   componentDidMount() {
@@ -15,6 +16,7 @@ class AnimalDetail extends Component {
     newState.currentId = parseInt(this.props.match.params.animalId)
     newState.animal = this.props.animals.find(animal => animal.id === newState.currentId)
     newState.owners = this.props.animalOwners.filter(relation => relation.animalId === newState.currentId).map(join => this.props.owners.find(owner => owner.id === join.ownerId))
+    newState.employee = this.props.employees.find(employee => employee.id === newState.animal.employeeId)
     this.setState(newState)
 
   }
@@ -30,12 +32,14 @@ class AnimalDetail extends Component {
             <h4 className="card-title">
               {this.state.animal.name}
             </h4>
-            <h6>Owners:</h6>
+            <h6>{`Owner(s):`}</h6>
             <ul>
               {
                 this.state.owners.map(owner => <li key={owner.id}><Link to={`/owners/${owner.id}`}>{owner.name}</Link></li>)
               }
             </ul>
+            <h6>Caretaker:</h6>
+            <p>{this.state.employee.name}</p>
             <Link className="card-link" to="/animals" onClick={() => this.props.deleteAnimal(this.state.animal.id)}>Delete</Link>
           </div>
         </div>
