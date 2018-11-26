@@ -17,6 +17,7 @@ import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
 
 import AnimalForm from './animals/AnimalForm'
+import EmployeeForm from './employee/EmployeeForm'
 
 import SearchResults from './search/SearchResults'
 
@@ -36,9 +37,9 @@ class ApplicationViews extends Component {
 
   addAnimal = animal => {
     return AnimalManager.post(animal)
-    .then(() => AnimalManager.getAll())
-    .then(animals => this.setState({
-        animals:animals
+      .then(() => AnimalManager.getAll())
+      .then(animals => this.setState({
+        animals: animals
       })
     )
   }
@@ -46,6 +47,15 @@ class ApplicationViews extends Component {
   deleteOwner = id => {
     return OwnerManager.deleteAndList(id)
     .then(newState => this.setState(newState))
+  }
+
+  addEmployee = employee => {
+    return EmployeeManager.post(employee)
+      .then(() => EmployeeManager.getAll())
+      .then(employees => this.setState({
+        employees: employees
+      })
+    )
   }
 
   fireEmployee = id => {
@@ -82,7 +92,7 @@ class ApplicationViews extends Component {
 
         <Route
           path="/locations/:locationId(\d+)"
-          render={(props) => {
+          render={props => {
             return <LocationDetail {...props} locations={this.state.locations} />
           }} />
 
@@ -96,8 +106,8 @@ class ApplicationViews extends Component {
 
         <Route path="/animals/new" render={props => {
           return <AnimalForm {...props}
-                              addAnimal={this.addAnimal}
-                              employees={this.state.employees} />
+            addAnimal={this.addAnimal}
+            employees={this.state.employees} />
         }} />
 
         <Route
@@ -112,7 +122,12 @@ class ApplicationViews extends Component {
             fireEmployee={this.fireEmployee} />
         }} />
 
-        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+        <Route path="/employees/new" render={props => {
+          return <EmployeeForm {...props}
+            addEmployee={this.addEmployee} />
+        }} />
+
+        <Route path="/employees/:employeeId(\d+)" render={props => {
           return <EmployeeDetail { ...props }
             employees={this.state.employees}
             fireEmployee={this.fireEmployee} />

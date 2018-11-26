@@ -39,9 +39,9 @@ class AnimalForm extends Component {
         <form className="animalForm">
           <div className="form-group">
             <label htmlFor="animalname">Animal Name</label>
-            <input type="text" required="true" className="form-control" onChange={this.handleFieldChange} id="animalName" placeholder="Animal Name" />
+            <input type="text" required className="form-control" onChange={this.handleFieldChange} id="animalName" placeholder="Animal Name" />
           </div>
-          <div class="row">
+          <div className="row">
             <div className="form-group col-md-6">
               <label htmlFor="type">Animal Type</label>
               <input type="text" required="true" className="form-control" onChange={this.handleFieldChange} id="type" placeholder="Type" />
@@ -56,7 +56,7 @@ class AnimalForm extends Component {
               </select>
             </div>
           </div>
-          <button type="submi" className="btn btn-primary" onClick={this.constructNewAnimal}>Admit Animal</button>
+          <button type="submit" className="btn btn-primary" onClick={this.constructNewAnimal}>Admit Animal</button>
         </form>
       </div>
     )
