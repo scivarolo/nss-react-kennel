@@ -45,16 +45,6 @@ class AnimalManager extends APIManager {
 
   }
 
-  post(newAnimal) {
-    return fetch(`${this.urls.animals}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newAnimal)
-    }).then(data => data.json())
-  }
-
 }
 
 export default new AnimalManager()
