@@ -20,6 +20,7 @@ import AnimalForm from './animals/AnimalForm'
 import EmployeeForm from './employee/EmployeeForm'
 
 import SearchResults from './search/SearchResults'
+import OwnerForm from './owners/OwnerForm';
 
 class ApplicationViews extends Component {
   state = {
@@ -40,6 +41,15 @@ class ApplicationViews extends Component {
       .then(() => AnimalManager.getAll())
       .then(animals => this.setState({
         animals: animals
+      })
+    )
+  }
+
+  addOwner = owner => {
+    return OwnerManager.post(owner)
+      .then(() => OwnerManager.getAll())
+      .then(owners => this.setState({
+        owners: owners
       })
     )
   }
@@ -137,6 +147,11 @@ class ApplicationViews extends Component {
           return <OwnerList
             owners={this.state.owners}
             deleteOwner={this.deleteOwner} />
+        }} />
+
+        <Route path="/owners/new" render={ props => {
+          return <OwnerForm {...props}
+            addOwner={this.addOwner} />
         }} />
 
         <Route path="/owners/:ownerId(\d+)" render={props => {
