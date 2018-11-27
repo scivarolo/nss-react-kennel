@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 
 import AnimalManager from '../modules/AnimalManager'
@@ -21,6 +21,7 @@ import EditAnimal from './animals/AnimalEdit'
 import EmployeeForm from './employee/EmployeeForm'
 import OwnerForm from './owners/OwnerForm';
 
+import Login from './authentication/Login'
 
 import SearchResults from './search/SearchResults'
 
@@ -33,13 +34,32 @@ class ApplicationViews extends Component {
     animalOwners: []
   }
 
+  isAuthenticated = () => sessionStorage.getItem("credentials") || localStorage.getItem("credentials") !== null
+
+  componentDidMount() {
+    const newState = {}
+    const baseUrl = "http://localhost:5002/"
+
+    AnimalManager.getAll()
+      .then(animals => newState.animals = animals)
+    .then(() => LocationManager.getAll())
+      .then(locations => newState.locations = locations)
+    .then(() => EmployeeManager.getAll())
+      .then(employees => newState.employees = employees)
+    .then(() => OwnerManager.getAll())
+      .then(owners => newState.owners = owners)
+    .then(() => fetch(`${baseUrl}animalOwners`))
+      .then(r => r.json())
+      .then(animalOwners => newState.animalOwners = animalOwners)
+    .then(() => this.setState(newState))
+  }
+
   deleteAnimal = id => {
     return AnimalManager.deleteAndList(id)
       .then(newState => this.setState(newState))
   }
 
   addAnimal = (animal, owners) => {
-
     let newState = {}
     const baseUrl = "http://localhost:5002/"
 
@@ -122,30 +142,19 @@ class ApplicationViews extends Component {
     }))
   }
 
-  componentDidMount() {
-    const newState = {}
-    const baseUrl = "http://localhost:5002/"
-
-    AnimalManager.getAll()
-      .then(animals => newState.animals = animals)
-    .then(() => LocationManager.getAll())
-      .then(locations => newState.locations = locations)
-    .then(() => EmployeeManager.getAll())
-      .then(employees => newState.employees = employees)
-    .then(() => OwnerManager.getAll())
-      .then(owners => newState.owners = owners)
-    .then(() => fetch(`${baseUrl}animalOwners`))
-      .then(r => r.json())
-      .then(animalOwners => newState.animalOwners = animalOwners)
-    .then(() => this.setState(newState))
-  }
-
   render() {
     return (
       <Switch>
+
+        <Route path="/login" component={Login} />
+
         <Route exact path="/" render={() => {
-          return <LocationList locations={this.state.locations} />
+          if (this.isAuthenticated()) {
+            return <LocationList locations={this.state.locations} />
+          }
+          return <Redirect to="/login" />
         }} />
+
 
         <Route
           path="/locations/:locationId(\d+)"
@@ -154,11 +163,14 @@ class ApplicationViews extends Component {
           }} />
 
         <Route exact path="/animals" render={() => {
-          return <AnimalList
-            animals={this.state.animals}
-            owners={this.state.owners}
-            animalOwners={this.state.animalOwners}
-            deleteAnimal={this.deleteAnimal} />
+          if (this.isAuthenticated()) {
+            return <AnimalList
+              animals={this.state.animals}
+              owners={this.state.owners}
+              animalOwners={this.state.animalOwners}
+              deleteAnimal={this.deleteAnimal} />
+          }
+          return <Redirect to="/login" />
         }} />
 
         <Route exact path="/animals/new" render={props => {
@@ -189,9 +201,12 @@ class ApplicationViews extends Component {
           }} />
 
         <Route exact path="/employees" render={() => {
-          return <EmployeeList
+          if(this.isAuthenticated()) {
+            return <EmployeeList
             employees={this.state.employees}
             fireEmployee={this.fireEmployee} />
+          }
+          return <Redirect to="/login" />
         }} />
 
         <Route path="/employees/new" render={props => {
@@ -207,9 +222,12 @@ class ApplicationViews extends Component {
         }} />
 
         <Route exact path="/owners" render={() => {
-          return <OwnerList
-            owners={this.state.owners}
-            deleteOwner={this.deleteOwner} />
+          if (this.isAuthenticated()) {
+            return <OwnerList
+              owners={this.state.owners}
+              deleteOwner={this.deleteOwner} />
+          }
+          return <Redirect to="/login" />
         }} />
 
         <Route path="/owners/new" render={ props => {
@@ -226,8 +244,11 @@ class ApplicationViews extends Component {
         }} />
 
         <Route exact path="/results" render={() => {
-          return <SearchResults
-            results={this.props.searchResults} />
+          if(this.isAuthenticated()) {
+            return <SearchResults
+              results={this.props.searchResults} />
+          }
+          return <Redirect to="/login" />
         }} />
       </Switch>
     )
