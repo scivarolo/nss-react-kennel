@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import EmployeeCard from './EmployeeCard'
+
 class EmployeeList extends Component {
   render() {
     return (
@@ -15,15 +17,7 @@ class EmployeeList extends Component {
         <div className="card-columns">
         {
           this.props.employees.map(employee => {
-            return (
-              <div key={employee.id} className="card mb-3">
-                <div className="card-body">
-                  <h4 className="card-title">{employee.name}</h4>
-                  <Link className="btn btn-sm btn-info mr-1" to={`/employees/${employee.id}`}>Details</Link>
-                  <button type="button" className="btn btn-sm btn-danger" onClick={() => this.props.fireEmployee(employee.id)}>Fire</button>
-                </div>
-              </div>
-            )
+            return <EmployeeCard key={employee.id} employee={employee} {...this.props} />
           })
         }
         </div>
