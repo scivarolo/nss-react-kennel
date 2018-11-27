@@ -161,7 +161,7 @@ class ApplicationViews extends Component {
         <Route
           path="/locations/:locationId(\d+)"
           render={props => {
-            return <LocationDetail {...props} locations={this.state.locations} />
+            return <LocationDetail {...props} locations={this.state.locations} employees={this.state.employees} />
           }} />
 
         <Route exact path="/animals" render={() => {

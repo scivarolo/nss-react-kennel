@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import EmployeeCard from '../employee/EmployeeCard';
 
 class LocationDetail extends Component {
 
@@ -13,7 +14,14 @@ class LocationDetail extends Component {
               {location.name}
             </h4>
             <p>{location.address}</p>
-            {/* <Link className="card-link" to="/animals" onClick={() => this.props.firelocation(location.id)}>Delete</Link> */}
+            <div className="card-columns">
+              {
+                this.props.employees.filter(employee => employee.locationId === location.id)
+                .map(employee => {
+                  return <EmployeeCard key={employee.id} employee={employee} {...this.props} />
+                })
+              }
+            </div>
           </div>
         </div>
       </section>
