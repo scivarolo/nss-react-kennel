@@ -31,12 +31,6 @@
   ],
   "animals": [
     {
-      "name": "Mochi",
-      "type": "Dog",
-      "employeeId": 1,
-      "id": 7
-    },
-    {
       "name": "Milhouse",
       "type": "Dog",
       "employeeId": 3,
@@ -59,6 +53,12 @@
       "type": "Dog",
       "employeeId": 2,
       "id": 11
+    },
+    {
+      "name": "Mochi",
+      "type": "Dog",
+      "employeeId": 1,
+      "id": 12
     }
   ],
   "owners": [
@@ -105,21 +105,6 @@
   ],
   "animalOwners": [
     {
-      "animalId": 7,
-      "ownerId": 1,
-      "id": 10
-    },
-    {
-      "animalId": 7,
-      "ownerId": 2,
-      "id": 11
-    },
-    {
-      "animalId": 8,
-      "ownerId": 3,
-      "id": 12
-    },
-    {
       "animalId": 9,
       "ownerId": 4,
       "id": 13
@@ -138,6 +123,21 @@
       "animalId": 11,
       "ownerId": 7,
       "id": 16
+    },
+    {
+      "animalId": 12,
+      "ownerId": 1,
+      "id": 17
+    },
+    {
+      "animalId": 12,
+      "ownerId": 2,
+      "id": 18
+    },
+    {
+      "animalId": 8,
+      "ownerId": 2,
+      "id": 19
     }
   ]
 }

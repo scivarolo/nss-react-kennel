@@ -41,6 +41,7 @@ class AnimalDetail extends Component {
             <h6>Caretaker:</h6>
             <p><Link to={`/employees/${this.state.employee.id}`}>{this.state.employee.name}</Link></p>
             <Link className="card-link" to="/animals" onClick={() => this.props.deleteAnimal(this.state.animal.id)}>Delete</Link>
+            <Link className="card-link" to={`/animals/edit/${this.state.animal.id}`}>Edit</Link>
           </div>
         </div>
       </section>
