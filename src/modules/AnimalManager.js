@@ -47,6 +47,25 @@ class AnimalManager extends APIManager {
     .then(data => data.json())
   }
 
+  edit(animal) {
+
+
+
+    return fetch(`${this.urls[this.resource]}/${animal.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(animal)
+    }).then(r => r.json())
+  }
+
+  deleteOwnerRel(id) {
+    return fetch(`${this.urls.animalOwners}/${id}`, {
+      method: "DELETE",
+    })
+  }
+
 }
 
 export default new AnimalManager()

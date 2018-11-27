@@ -17,10 +17,12 @@ import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
 
 import AnimalForm from './animals/AnimalForm'
+import EditAnimal from './animals/AnimalEdit'
 import EmployeeForm from './employee/EmployeeForm'
+import OwnerForm from './owners/OwnerForm';
+
 
 import SearchResults from './search/SearchResults'
-import OwnerForm from './owners/OwnerForm';
 
 class ApplicationViews extends Component {
   state = {
@@ -50,7 +52,7 @@ class ApplicationViews extends Component {
             animalId: newAnimal.id,
             ownerId: owner
           }
-          return AnimalManager.linkOwnerAndAnimal(object)
+          ownerPromises.push(AnimalManager.linkOwnerAndAnimal(object))
         })
         return Promise.all(ownerPromises)
       })
@@ -60,6 +62,34 @@ class ApplicationViews extends Component {
       .then(r => r.json())
       .then(animalOwners => newState.animalOwners = animalOwners)
       .then(() => this.setState(newState))
+  }
+
+  editAnimal = (animal, newOwnerIds) => {
+    //let newState = {}
+    //const baseUrl = "http://localhost:5002"
+
+    return AnimalManager.edit(animal)
+      .then(updated => {
+        let animalId = updated.id
+        let ownerPromises = []
+
+        let currentOwners = this.state.animalOwners.filter(rel => rel.animalId === animalId)
+
+
+        // remove current owners and add new owners
+        currentOwners.forEach(ownerRel => {
+          ownerPromises.push(AnimalManager.deleteOwnerRel(ownerRel.id))
+        })
+
+        newOwnerIds.forEach(newOwnerId => {
+          let object = {
+            animalId: animalId,
+            ownerId: newOwnerId
+          }
+          ownerPromises.push(AnimalManager.linkOwnerAndAnimal(object))
+        })
+        return Promise.all(ownerPromises)
+      })
   }
 
   addOwner = owner => {
@@ -131,12 +161,22 @@ class ApplicationViews extends Component {
             deleteAnimal={this.deleteAnimal} />
         }} />
 
-        <Route path="/animals/new" render={props => {
+        <Route exact path="/animals/new" render={props => {
           return <AnimalForm {...props}
             addAnimal={this.addAnimal}
             owners={this.state.owners}
             employees={this.state.employees} />
         }} />
+
+        <Route path="/animals/edit/:animalId(\d+)"
+          render={props => {
+            return <EditAnimal {...props}
+              animals={this.state.animals}
+              owners={this.state.owners}
+              employees={this.state.employees}
+              animalOwners={this.state.animalOwners}
+              editAnimal={this.editAnimal} />
+          }} />
 
         <Route
           path="/animals/:animalId(\d+)"
