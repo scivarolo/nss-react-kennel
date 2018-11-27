@@ -19,6 +19,10 @@ class APIManager {
     return fetch(`${this.urls[this.resource]}`).then(r => r.json())
   }
 
+  getAnimalOwners() {
+    return fetch(this.urls.animalOwners).then(r => r.json())
+  }
+
   query(queryString) {
     return fetch(`${this.urls[this.resource]}?q=${queryString}`)
     .then(r => r.json())

@@ -61,7 +61,6 @@ class ApplicationViews extends Component {
 
   addAnimal = (animal, owners) => {
     let newState = {}
-    const baseUrl = "http://localhost:5002/"
 
     return AnimalManager.post(animal)
       .then(newAnimal => {
@@ -78,15 +77,13 @@ class ApplicationViews extends Component {
       })
       .then(() => AnimalManager.getAll())
       .then(animals => newState.animals = animals)
-      .then(() => fetch(`${baseUrl}animalOwners`))
-      .then(r => r.json())
+      .then(() => AnimalManager.getAnimalOwners())
       .then(animalOwners => newState.animalOwners = animalOwners)
       .then(() => this.setState(newState))
   }
 
   editAnimal = (animal, newOwnerIds) => {
-    //let newState = {}
-    //const baseUrl = "http://localhost:5002"
+    let newState = {}
 
     return AnimalManager.edit(animal)
       .then(updated => {
@@ -95,21 +92,26 @@ class ApplicationViews extends Component {
 
         let currentOwners = this.state.animalOwners.filter(rel => rel.animalId === animalId)
 
-
-        // remove current owners and add new owners
+        // remove current owners
         currentOwners.forEach(ownerRel => {
           ownerPromises.push(AnimalManager.deleteOwnerRel(ownerRel.id))
         })
 
+        // add new owners
         newOwnerIds.forEach(newOwnerId => {
           let object = {
-            animalId: animalId,
-            ownerId: newOwnerId
+            animalId: parseInt(animalId),
+            ownerId: parseInt(newOwnerId)
           }
           ownerPromises.push(AnimalManager.linkOwnerAndAnimal(object))
         })
         return Promise.all(ownerPromises)
       })
+      .then(() => AnimalManager.getAll())
+      .then(animals => newState.animals = animals)
+      .then(() => AnimalManager.getAnimalOwners())
+      .then(animalOwners => newState.animalOwners = animalOwners)
+      .then(() => this.setState(newState))
   }
 
   addOwner = owner => {
