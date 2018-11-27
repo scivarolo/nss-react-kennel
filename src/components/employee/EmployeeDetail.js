@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import AnimalCard from '../animals/AnimalCard'
 
 class EmployeeDetail extends Component {
 
@@ -14,15 +15,15 @@ class EmployeeDetail extends Component {
               {employee.name}
             </h4>
             <h6>Responsible for:</h6>
+
             { animals.length > 0
               ? (
-                <ul>
-                  { animals.map(animal => {
-                    return <li key={animal.id}>
-                  <Link to={`/animals/${animal.id}`}>{animal.name}</Link></li>
-                  })
+                  <div className="card-columns">
+                  {
+                    animals.map(animal => {
+                    return <AnimalCard key={animal.id} animal={animal} {...this.props} /> })
                   }
-                </ul>
+                  </div>
               )
               : (<p>Not caring for any animals</p>)
             }

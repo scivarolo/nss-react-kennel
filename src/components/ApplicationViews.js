@@ -220,6 +220,8 @@ class ApplicationViews extends Component {
           return <EmployeeDetail { ...props }
             employees={this.state.employees}
             animals={this.state.animals}
+            owners={this.state.owners}
+            animalOwners={this.state.animalOwners}
             fireEmployee={this.fireEmployee} />
         }} />
 
