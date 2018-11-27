@@ -48,9 +48,6 @@ class AnimalManager extends APIManager {
   }
 
   edit(animal) {
-
-
-
     return fetch(`${this.urls[this.resource]}/${animal.id}`, {
       method: "PUT",
       headers: {

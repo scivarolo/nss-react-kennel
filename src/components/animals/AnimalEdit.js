@@ -46,7 +46,7 @@ class EditAnimal extends Component {
     const animal = {
       name: this.state.animalName,
       type: this.state.type,
-      employeeId: this.state.employee,
+      employeeId: parseInt(this.state.employee),
       id: this.props.match.params.animalId
     }
     const owners = this.state.owners
@@ -93,9 +93,9 @@ class EditAnimal extends Component {
                   // Pre-select the current employee
                   this.props.employees.map(e => {
                     if(this.state.employee === e.id) {
-                      return <option selected key={e.id} id={e.id}>{e.name}</option>
+                      return <option selected key={e.id} id={e.id} value={e.id}>{e.name}</option>
                     }
-                    return <option key={e.id} id={e.id}>{e.name}</option>
+                    return <option key={e.id} id={e.id} value={e.id}>{e.name}</option>
                   })
                   }
                 </select>
